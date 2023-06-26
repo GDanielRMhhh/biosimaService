@@ -1,0 +1,37 @@
+[25-Jun-2023 20:10:38 America/Mazatlan] {"idBranch":41,"name":"Abastos","adress":"Mercado de abastos","idCompany":12,"delete":false,"userSesion":"dRodriguez"}
+[25-Jun-2023 20:10:38 America/Mazatlan] {"idBranch":42,"name":"Tierra Blanca","adress":"Colonia Tierra Blanca #1079","idCompany":12,"delete":false,"userSesion":"dRodriguez"}
+[25-Jun-2023 20:10:38 America/Mazatlan] PHP Warning:  Undefined array key 2 in C:\xampp\htdocs\proyectos\biosimaService\src\routes\company.php on line 19
+[25-Jun-2023 20:10:38 America/Mazatlan] PHP Warning:  Undefined array key 2 in C:\xampp\htdocs\proyectos\biosimaService\src\routes\company.php on line 20
+[25-Jun-2023 20:10:38 America/Mazatlan] PHP Warning:  Undefined array key 2 in C:\xampp\htdocs\proyectos\biosimaService\src\routes\company.php on line 21
+[25-Jun-2023 20:13:02 America/Mazatlan] {"idBranch":41,"name":"Abastos","adress":"Mercado de abastos","idCompany":12,"delete":false,"userSesion":"dRodriguez"}
+[25-Jun-2023 20:13:03 America/Mazatlan] {"idBranch":42,"name":"Tierra Blanca","adress":"Colonia Tierra Blanca #1079","idCompany":12,"delete":false,"userSesion":"dRodriguez"}
+[25-Jun-2023 20:13:03 America/Mazatlan] PHP Warning:  Undefined array key 2 in C:\xampp\htdocs\proyectos\biosimaService\src\routes\company.php on line 19
+[25-Jun-2023 20:13:03 America/Mazatlan] PHP Warning:  Undefined array key 2 in C:\xampp\htdocs\proyectos\biosimaService\src\routes\company.php on line 20
+[25-Jun-2023 20:13:03 America/Mazatlan] PHP Warning:  Undefined array key 2 in C:\xampp\htdocs\proyectos\biosimaService\src\routes\company.php on line 21
+[25-Jun-2023 20:13:34 America/Mazatlan] {"idBranch":41,"name":"Abastos","adress":"Mercado de abastos","idCompany":12,"delete":false,"userSesion":"dRodriguez"}
+[25-Jun-2023 20:13:34 America/Mazatlan] {"idBranch":42,"name":"Tierra Blanca","adress":"Colonia Tierra Blanca #1079","idCompany":12,"delete":false,"userSesion":"dRodriguez"}
+[25-Jun-2023 20:13:34 America/Mazatlan] {"idBranch":0,"name":"San Isidro","adress":"Lomas de San Isidro","delete":false,"idCompany":12,"userSesion":"dRodriguez"}
+[25-Jun-2023 20:13:35 America/Mazatlan] PHP Warning:  Undefined array key 2 in C:\xampp\htdocs\proyectos\biosimaService\src\routes\company.php on line 19
+[25-Jun-2023 20:13:35 America/Mazatlan] PHP Warning:  Undefined array key 2 in C:\xampp\htdocs\proyectos\biosimaService\src\routes\company.php on line 20
+[25-Jun-2023 20:13:35 America/Mazatlan] PHP Warning:  Undefined array key 2 in C:\xampp\htdocs\proyectos\biosimaService\src\routes\company.php on line 21
+[25-Jun-2023 20:16:44 America/Mazatlan] {"idBranch":41,"name":"Abastos","adress":"Mercado de abastos","idCompany":12,"delete":false,"userSesion":"dRodriguez"}
+[25-Jun-2023 20:16:44 America/Mazatlan] {"idBranch":42,"name":"Tierra Blanca","adress":"Colonia Tierra Blanca #1079","idCompany":12,"delete":false,"userSesion":"dRodriguez"}
+[25-Jun-2023 20:16:44 America/Mazatlan] {"idBranch":0,"name":"San Isidro","adress":"Lomas de San Isidro","delete":false,"idCompany":12,"userSesion":"dRodriguez"}
+[25-Jun-2023 20:16:44 America/Mazatlan] {"idBranch":0,"name":"Huizaches","adress":"Colonia La Huizaches","delete":false,"idCompany":12,"userSesion":"dRodriguez"}
+[25-Jun-2023 20:16:44 America/Mazatlan] PHP Warning:  Undefined array key 2 in C:\xampp\htdocs\proyectos\biosimaService\src\routes\company.php on line 19
+[25-Jun-2023 20:16:44 America/Mazatlan] PHP Warning:  Undefined array key 2 in C:\xampp\htdocs\proyectos\biosimaService\src\routes\company.php on line 20
+[25-Jun-2023 20:16:44 America/Mazatlan] PHP Warning:  Undefined array key 2 in C:\xampp\htdocs\proyectos\biosimaService\src\routes\company.php on line 21
+[25-Jun-2023 21:51:31 America/Mazatlan] {"idBranch":27,"name":"Abastos","adress":"Col abastos","idCompany":1,"delete":false,"userSesion":"dRodriguez"}
+[25-Jun-2023 21:51:31 America/Mazatlan] {"idBranch":28,"name":"Centro","adress":"Col Centro","idCompany":1,"delete":false,"userSesion":"dRodriguez"}
+[25-Jun-2023 21:51:31 America/Mazatlan] PHP Warning:  Undefined array key 2 in C:\xampp\htdocs\proyectos\biosimaService\src\routes\company.php on line 19
+[25-Jun-2023 21:51:31 America/Mazatlan] PHP Warning:  Undefined array key 2 in C:\xampp\htdocs\proyectos\biosimaService\src\routes\company.php on line 20
+[25-Jun-2023 21:51:31 America/Mazatlan] PHP Warning:  Undefined array key 2 in C:\xampp\htdocs\proyectos\biosimaService\src\routes\company.php on line 21
+[25-Jun-2023 21:56:01 America/Mazatlan] {"idBranch":41,"name":"Abastos","adress":"Mercado de abastos","idCompany":12,"delete":false,"userSesion":"cGarciaOlivas"}
+[25-Jun-2023 21:56:01 America/Mazatlan] {"idBranch":43,"name":"San Isidro","adress":"Lomas de San Isidro","idCompany":12,"delete":false,"userSesion":"cGarciaOlivas"}
+[25-Jun-2023 21:56:01 America/Mazatlan] {"idBranch":44,"name":"San Isidro","adress":"Lomas de San Isidro","idCompany":12,"delete":false,"userSesion":"cGarciaOlivas"}
+[25-Jun-2023 21:56:01 America/Mazatlan] {"idBranch":42,"name":"Tierra Blanca","adress":"Colonia Tierra Blanca #1079","idCompany":12,"delete":false,"userSesion":"cGarciaOlivas"}
+[25-Jun-2023 21:56:01 America/Mazatlan] {"idBranch":0,"name":"Cetro","adress":"Colonia Centro","delete":false,"idCompany":12,"userSesion":"cGarciaOlivas"}
+[25-Jun-2023 21:56:01 America/Mazatlan] {"idBranch":45,"name":"Huizaches","adress":"Colonia La Huizaches","idCompany":12,"delete":true,"userSesion":"cGarciaOlivas"}
+[25-Jun-2023 21:56:01 America/Mazatlan] PHP Warning:  Undefined array key 2 in C:\xampp\htdocs\proyectos\biosimaService\src\routes\company.php on line 19
+[25-Jun-2023 21:56:01 America/Mazatlan] PHP Warning:  Undefined array key 2 in C:\xampp\htdocs\proyectos\biosimaService\src\routes\company.php on line 20
+[25-Jun-2023 21:56:01 America/Mazatlan] PHP Warning:  Undefined array key 2 in C:\xampp\htdocs\proyectos\biosimaService\src\routes\company.php on line 21
