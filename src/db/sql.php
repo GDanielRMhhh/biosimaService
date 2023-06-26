@@ -19,7 +19,7 @@ class Sql extends ConectionDB
             return $res;
         } catch (\PDOException $p) {
             error_log('sql::exists->' . $p);
-            die(ResponceHttp::status500());
+            die(ResponceHttp::status(ResponceHttp::STATUS_500,false,''));
         }
     }
 }

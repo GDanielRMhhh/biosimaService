@@ -111,7 +111,7 @@ class CompanyController
             } else {
                 CompanyModel::setIdCompany($idCompany);
                 CompanyModel::setStatus(Status::ENABLED);
-                CompanyModel::setUserSesion($this->data['userName']);
+                CompanyModel::setUserSesion($this->data['userSesion']);
                 echo json_encode(CompanyModel::updateStatus());
                 exit;
             }
@@ -129,7 +129,7 @@ class CompanyController
             } else {
                 CompanyModel::setIdCompany($idCompany);
                 CompanyModel::setStatus(Status::DISABLED);
-                CompanyModel::setUserSesion($this->data['userName']);
+                CompanyModel::setUserSesion($this->data['userSesion']);
                 echo json_encode(CompanyModel::updateStatus());
                 exit;
             }
@@ -147,7 +147,7 @@ class CompanyController
             } else {
                 CompanyModel::setIdCompany($idCompany);
                 CompanyModel::setStatus(Status::DELETED);
-                CompanyModel::setUserSesion($this->data['userName']);
+                CompanyModel::setUserSesion($this->data['userSesion']);
                 echo json_encode(CompanyModel::updateStatus());
                 exit;
             }

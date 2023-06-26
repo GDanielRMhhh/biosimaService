@@ -30,7 +30,7 @@ class ConectionDB
             return $dns;
         } catch (\PDOException $p) {
             error_log("Error de conexión: " . $p);
-            die(json_encode(ResponceHttp::status500()));
+            die(json_encode(ResponceHttp::status(ResponceHttp::STATUS_500,false,'Error de conexión')));
         }
     }
 }

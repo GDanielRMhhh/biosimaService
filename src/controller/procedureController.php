@@ -7,6 +7,7 @@ use App\Config\Security;
 use App\Model\ContactModel;
 use App\Model\ProcedureModel;
 use App\Tools\HttpMethod;
+use App\Tools\Notified;
 use App\Tools\Status;
 
 class ProcedureController
@@ -51,7 +52,7 @@ class ProcedureController
                 echo ResponceHttp::status(ResponceHttp::STATUS_200, false, "El idProcedure debe ser númerico");
             } else {
                 ProcedureModel::setIdProcedure($idProcedure);
-                ProcedureModel::setNotified(1);
+                ProcedureModel::setNotified(Notified::YES);
                 ProcedureModel::setUserSesion($this->data['userSesion']);
                 echo json_encode(ProcedureModel::hide());
                 exit;
@@ -153,9 +154,9 @@ class ProcedureController
         if ($this->method == HttpMethod::PUT && $endpoint == $this->route) {
             $idProcedure = $this->params[2];
             if (!isset($idProcedure)) {
-                echo json_encode(ResponceHttp::status200("Es requerido el idProcedure"));
+                echo json_encode(ResponceHttp::status(ResponceHttp::STATUS_200,true,"Es requerido el idProcedure"));
             } else if (!is_numeric($idProcedure)) {
-                echo json_encode(ResponceHttp::status200("El idProcedure debe ser númerico"));
+                echo json_encode(ResponceHttp::status(ResponceHttp::STATUS_200,true,"El idProcedure debe ser númerico"));
             } else {
                 ProcedureModel::setIdProcedure($idProcedure);
                 ProcedureModel::setStatus(Status::ENABLED);
@@ -171,9 +172,9 @@ class ProcedureController
         if ($this->method == HttpMethod::PUT && $endpoint == $this->route) {
             $idProcedure = $this->params[2];
             if (!isset($idProcedure)) {
-                echo json_encode(ResponceHttp::status200("Es requerido el idProcedure"));
+                echo json_encode(ResponceHttp::status(ResponceHttp::STATUS_200,true,"Es requerido el idProcedure"));
             } else if (!is_numeric($idProcedure)) {
-                echo json_encode(ResponceHttp::status200("El idProcedure debe ser númerico"));
+                echo json_encode(ResponceHttp::status(ResponceHttp::STATUS_200,true,"El idProcedure debe ser númerico"));
             } else {
                 ProcedureModel::setIdProcedure($idProcedure);
                 ProcedureModel::setStatus(Status::DISABLED);
@@ -189,9 +190,9 @@ class ProcedureController
         if ($this->method == HttpMethod::PUT && $endpoint == $this->route) {
             $idProcedure = $this->params[2];
             if (!isset($idProcedure)) {
-                echo json_encode(ResponceHttp::status200("Es requerido el idProcedure"));
+                echo json_encode(ResponceHttp::status(ResponceHttp::STATUS_200,true,"Es requerido el idProcedure"));
             } else if (!is_numeric($idProcedure)) {
-                echo json_encode(ResponceHttp::status200("El idProcedure debe ser númerico"));
+                echo json_encode(ResponceHttp::status(ResponceHttp::STATUS_200,true,"El idProcedure debe ser númerico"));
             } else {
                 ProcedureModel::setIdProcedure($idProcedure);
                 ProcedureModel::setStatus(Status::DELETED);

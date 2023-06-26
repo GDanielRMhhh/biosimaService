@@ -7,7 +7,9 @@ use App\Config\Security;
 use App\db\ConectionDB;
 use App\DB\Sql;
 use App\Tools\Action;
+use App\Tools\Expiration;
 use App\Tools\Module;
+use App\Tools\Notified;
 use App\Tools\Status;
 
 class ProcedureModel extends ConectionDB
@@ -74,7 +76,8 @@ class ProcedureModel extends ConectionDB
     {
         try {
             $con = self::getConnection();
-            $query = $con->prepare("SELECT
+            $query = $con->prepare(
+                "SELECT
                                         P.idProcedure,
                                         P.name,
                                         P.procedureCode,
@@ -96,11 +99,11 @@ class ProcedureModel extends ConectionDB
             $query->execute([
                 'status' => Status::DELETED
             ]);
-            $rs['data'] = $query->fetchAll(\PDO::FETCH_ASSOC);
-            return $rs;
+            $rs = $query->fetchAll(\PDO::FETCH_ASSOC);
+            return ResponceHttp::status(ResponceHttp::STATUS_200, true, 'Tramite obtenidos correctamente', $rs);
         } catch (\PDOException $e) {
             error_log('ProcedureModel::getAll -> ' . $e);
-            die(json_encode(ResponceHttp::status500("No se pueden obtener los datos")));
+            die(json_encode(ResponceHttp::status(ResponceHttp::STATUS_500, false, "No se pueden obtener los datos")));
         }
     }
 
@@ -127,10 +130,11 @@ class ProcedureModel extends ConectionDB
             ]);
 
             if ($queryProcedure->rowCount() === 0) {
-                return ResponceHttp::status400("No existe un tramite con este idProcedure");
+                return ResponceHttp::status(ResponceHttp::STATUS_400, false, "No existe un tramite con este idProcedure");
             } else {
                 $conContact = self::getConnection();
-                $queryContact = $conContact->prepare("SELECT
+                $queryContact = $conContact->prepare(
+                    "SELECT
                                                         C.idContact,
                                                         C.name,
                                                         C.email,
@@ -151,17 +155,17 @@ class ProcedureModel extends ConectionDB
 
                 $rsProcedure['data'] = $queryProcedure->fetch(\PDO::FETCH_ASSOC);
                 $rsContact['data'] = $queryContact->fetchAll(\PDO::FETCH_ASSOC);
-                
+
                 $data = array(
                     'procedure' => $rsProcedure['data'],
                     'contact' => $rsContact['data']
                 );
 
-                return $data;
+                return ResponceHttp::status(ResponceHttp::STATUS_200, true, 'Trmaite obtenido correctamente', $data);
             }
         } catch (\PDOException $e) {
             error_log('ProcedureModel::getById -> ' . $e);
-            die(json_encode(ResponceHttp::status500("No se pueden obtener los datos")));
+            die(json_encode(ResponceHttp::status(ResponceHttp::STATUS_500, false, "No se pueden obtener los datos")));
         }
     }
 
@@ -174,12 +178,12 @@ class ProcedureModel extends ConectionDB
                 if (Sql::exists("SELECT * FROM procedures WHERE idProcedure = :idProcedure", ":idProcedure", self::getIdProcedure())) {
                     return self::update();
                 } else {
-                    return ResponceHttp::status(ResponceHttp::STATUS_400,false,"Este idProcedure no existe; No se puede actulizar");
+                    return ResponceHttp::status(ResponceHttp::STATUS_400, false, "Este idProcedure no existe; No se puede actulizar");
                 }
             }
         } catch (\PDOException $e) {
             error_log('ProcedureModel::post -> ' . $e);
-            die(json_encode(ResponceHttp::status(ResponceHttp::STATUS_500,false,"No se pudo completar la operacion")));
+            die(json_encode(ResponceHttp::status(ResponceHttp::STATUS_500, false, "No se pudo completar la operacion")));
         }
     }
 
@@ -205,15 +209,15 @@ class ProcedureModel extends ConectionDB
         ]);
 
         if ($query->rowCount() > 0) {
-            $idProcedireCreated = $con->lastInsertId(); 
+            $idProcedireCreated = $con->lastInsertId();
 
             LogModel::newLog(self::getUserSesion(), Module::PROCEDURE, Action::CREATE, 'Se creó el tramite con ID: ' . $idProcedireCreated);
             return [
                 'idProcedure' => $idProcedireCreated,
-                'responce' => ResponceHttp::status(ResponceHttp::STATUS_200,true,"Tramite creado correctamente")
+                'responce' => ResponceHttp::status(ResponceHttp::STATUS_200, true, "Tramite creado correctamente")
             ];
         } else {
-            return ResponceHttp::status(ResponceHttp::STATUS_500,true,'No se pudo crear el tramite');
+            return ResponceHttp::status(ResponceHttp::STATUS_500, true, 'No se pudo crear el tramite');
         }
     }
 
@@ -247,7 +251,7 @@ class ProcedureModel extends ConectionDB
         LogModel::newLog(self::getUserSesion(), Module::PROCEDURE, Action::UPDATE, 'Se modificó el tramite con ID: ' . self::getIdProcedure());
         return [
             'idProcedure' => self::getIdProcedure(),
-            'responce' => ResponceHttp::status(ResponceHttp::STATUS_200,true,'Tramite modificado correctamente')
+            'responce' => ResponceHttp::status(ResponceHttp::STATUS_200, true, 'Tramite modificado correctamente')
         ];
     }
 
@@ -264,11 +268,12 @@ class ProcedureModel extends ConectionDB
             LogModel::newLog(self::getUserSesion(), Module::PROCEDURE, Action::getActionSring(self::getStatus()), 'Se modificó el status del tramite con ID: ' . self::getIdProcedure());
         } catch (\PDOException $e) {
             error_log('ProcedureModel::updateStatus -> ' . $e);
-            die(json_encode(ResponceHttp::status500()));
+            die(json_encode(ResponceHttp::status(ResponceHttp::STATUS_500, false, '')));
         }
     }
 
-    final public static function overDueProcedures(){
+    final public static function overDueProcedures()
+    {
         try {
             $setting = SettingModel::getSetting();
 
@@ -288,22 +293,25 @@ class ProcedureModel extends ConectionDB
                                         INNER JOIN company AS C ON C.idCompany = P.idCompany
                                         INNER JOIN branch AS B ON B.idBranch = P.idBranch
                                     WHERE 
-                                        P.status = 1
-                                        AND P.expire = 1
-                                        AND P.notified = 0
+                                        P.status = :status
+                                        AND P.expire = :expire
+                                        AND P.notified = :notified
                                         AND (
                                                 TIMESTAMPDIFF(DAY,NOW(),P.dueDate) BETWEEN 0 AND :marginDays
                                         )
                                     ORDER BY 
                                         P.dueDate");
             $query->execute([
-                'marginDays' => $setting['data']['marginDays']
+                'marginDays' => $setting['data']['marginDays'],
+                'status' => Status::ENABLED,
+                'expire' => Expiration::YES,
+                'notified' => Notified::NO
             ]);
-            $rs['data'] = $query->fetchAll(\PDO::FETCH_ASSOC);
-            return $rs;
+            $rs = $query->fetchAll(\PDO::FETCH_ASSOC);
+            return ResponceHttp::status(ResponceHttp::STATUS_200, true, 'Tramites obtenidos correctamente', $rs);
         } catch (\PDOException $e) {
-            error_log('UserModel::getUser -> ' . $e);
-            die(json_encode(ResponceHttp::status500("No se pueden obtener los datos")));
+            error_log('ProcedureModel::getUser -> ' . $e);
+            die(json_encode(ResponceHttp::status(ResponceHttp::STATUS_500, false, "No se pueden obtener los datos")));
         }
     }
 
@@ -318,9 +326,10 @@ class ProcedureModel extends ConectionDB
             ]);
 
             LogModel::newLog(self::getUserSesion(), Module::PROCEDURE, Action::UNSHOW, 'Se ocultó el tramite con ID: ' . self::getIdProcedure());
+            return ResponceHttp::status(ResponceHttp::STATUS_200);
         } catch (\PDOException $e) {
             error_log('ProcedureModel::updateStatus -> ' . $e);
-            die(json_encode(ResponceHttp::status500()));
+            die(json_encode(ResponceHttp::status(ResponceHttp::STATUS_500, false, '')));
         }
     }
 }

@@ -119,7 +119,7 @@ class UserController
             } else {
                 UserModel::setIdUser($idUser);
                 UserModel::setStatus(Status::ENABLED);
-                UserModel::setUserSesion($this->data['userName']);
+                UserModel::setUserSesion($this->data['userSesion']);
                 echo json_encode(UserModel::updateStatusUser());
                 exit;
             }
@@ -137,7 +137,7 @@ class UserController
             } else {
                 UserModel::setIdUser($idUser);
                 UserModel::setStatus(Status::DISABLED);
-                UserModel::setUserSesion($this->data['userName']);
+                UserModel::setUserSesion($this->data['userSesion']);
                 echo json_encode(UserModel::updateStatusUser());
                 exit;
             }
@@ -155,7 +155,7 @@ class UserController
             } else {
                 UserModel::setIdUser($idUser);
                 UserModel::setStatus(Status::DELETED);
-                UserModel::setUserSesion($this->data['userName']);
+                UserModel::setUserSesion($this->data['userSesion']);
                 echo json_encode(UserModel::updateStatusUser());
                 exit;
             }

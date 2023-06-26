@@ -39,7 +39,7 @@ class CountryModel extends ConectionDB
             return ResponceHttp::status(ResponceHttp::STATUS_200, true, "Paises obtenidos correctamente", $rs);
         } catch (\PDOException $e) {
             error_log('CountryModel::getAll -> ' . $e);
-            die(json_encode(ResponceHttp::status500("No se pueden obtener los datos")));
+            die(json_encode(ResponceHttp::status(ResponceHttp::STATUS_500,false,"No se pueden obtener los datos")));
         }
     }
 }

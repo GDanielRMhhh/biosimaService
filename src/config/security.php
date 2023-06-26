@@ -49,7 +49,7 @@ class Security
     final public static function validateTokenJwt(array $token, string $key)
     {
         if (!isset($token['Authorization'])) {
-            die(json_encode(ResponceHttp::status400('El token de acceso es requerido')));
+            die(json_encode(ResponceHttp::status(ResponceHttp::STATUS_400,false,'El token de acceso es requerido')));
             exit;
         }
 
@@ -61,7 +61,7 @@ class Security
         } catch (\Exception $e) { 
             error_log($e);
             error_log('Token invalido o expirado');
-            die(json_encode(ResponceHttp::status401('Token invalido o expirado')));
+            die(json_encode(ResponceHttp::status(ResponceHttp::STATUS_401,false,'Token invalido o expirado')));
         }
     }
 

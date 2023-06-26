@@ -35,7 +35,7 @@ class UserTypeModel extends ConectionDB
             return ResponceHttp::status(ResponceHttp::STATUS_200, true, "Tipos de usuario obtenidos correctamente", $rs);
         } catch (\PDOException $e) {
             error_log('UserTypeModel::getAll -> ' . $e);
-            die(json_encode(ResponceHttp::status500("No se pueden obtener los datos")));
+            die(json_encode(ResponceHttp::status(ResponceHttp::STATUS_500,false,"No se pueden obtener los datos")));
         }
     }
 }

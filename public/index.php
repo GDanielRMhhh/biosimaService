@@ -26,7 +26,7 @@ if (isset($_GET['route'])) {
     $file = dirname(__DIR__) . '/src/routes/' . $url[0] . '.php';
 
     if (!in_array($url[0], $list)) {
-        echo json_encode(ResponceHttp::status400('La ruta no existe'));
+        echo json_encode(ResponceHttp::status(ResponceHttp::STATUS_400,false,'La ruta no existe'));
         exit;
     }
 
@@ -35,10 +35,10 @@ if (isset($_GET['route'])) {
         require $file;
         exit;
     } else {
-        echo json_encode(ResponceHttp::status400('La ruta no existe'));
+        echo json_encode(ResponceHttp::status(ResponceHttp::STATUS_400,false,'La ruta no existe'));
         exit;
     }
 } else {
-    echo json_encode(ResponceHttp::status404('La ruta no existe'));
+    echo json_encode(ResponceHttp::status(ResponceHttp::STATUS_400,false,'La ruta no existe'));
     exit;
 }

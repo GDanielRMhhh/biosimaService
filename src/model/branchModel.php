@@ -22,7 +22,6 @@ class BranchModel extends ConectionDB
 
     public function __construct(array $data)
     {
-        error_log(json_encode($data));
         self::$idBranch = $data['idBranch'];
         self::$name = $data['name'];
         self::$adress = $data['adress'];

@@ -284,7 +284,7 @@ class UserModel extends ConectionDB
         ]);
 
         if ($query->rowCount() > 0) {
-            return ResponceHttp::status200('Token actualizado');
+            return ResponceHttp::status(ResponceHttp::STATUS_200,true,'Token actualizado');
         } else {
             die(json_encode(ResponceHttp::status(ResponceHttp::STATUS_500, false, 'No se pudo completar la operación')));
         }
