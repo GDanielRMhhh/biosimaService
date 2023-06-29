@@ -4,8 +4,7 @@ namespace App\Model;
 
 use App\Config\ResponceHttp;
 use App\Config\Security;
-use App\db\ConectionDB;
-use App\DB\Sql;
+use App\Db\ConectionDB;
 
 class UserTypeModel extends ConectionDB
 {
@@ -21,7 +20,7 @@ class UserTypeModel extends ConectionDB
     final public static function getIdUserType() { return self::$idUserType; }
     final public static function getName() { return self::$name; }
     
-    final public static function setIdUserType(string $idUserType) { self::$idUserType = $idUserType; }
+    final public static function setIdUserType(int $idUserType) { self::$idUserType = $idUserType; }
     final public static function setName(string $name) { self::$name = $name; }
     
     final public static function getAll()

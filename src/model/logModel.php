@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-use App\db\ConectionDB;
+use App\Db\ConectionDB;
 
 class LogModel extends ConectionDB
 {

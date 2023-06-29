@@ -1,11 +1,11 @@
 <?php
 
-namespace App\db;
+namespace App\Db;
 
 use App\Config\ResponceHttp;
 use PDO;
 
-require __DIR__ . '/dataDB.php';
+require __DIR__ . '/DataDB.php';
 
 class ConectionDB
 {

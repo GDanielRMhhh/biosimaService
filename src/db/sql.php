@@ -1,9 +1,9 @@
 <?php
 
-namespace App\DB;
+namespace App\Db;
 
 use App\Config\ResponceHttp;
-use App\db\ConectionDB;
+use App\Db\ConectionDB;
 
 class Sql extends ConectionDB
 {

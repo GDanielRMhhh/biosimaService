@@ -4,13 +4,16 @@ namespace App\Model;
 
 use App\Config\ResponceHttp;
 use App\Config\Security;
-use App\db\ConectionDB;
-use App\DB\Sql;
+use App\Db\ConectionDB;
+use App\Db\Sql;
 use App\Tools\Action;
 use App\Tools\Expiration;
 use App\Tools\Module;
 use App\Tools\Notified;
 use App\Tools\Status;
+use Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 
 class ProcedureModel extends ConectionDB
 {
@@ -212,12 +215,76 @@ class ProcedureModel extends ConectionDB
             $idProcedireCreated = $con->lastInsertId();
 
             LogModel::newLog(self::getUserSesion(), Module::PROCEDURE, Action::CREATE, 'Se creó el tramite con ID: ' . $idProcedireCreated);
+            
+
+            
             return [
                 'idProcedure' => $idProcedireCreated,
                 'responce' => ResponceHttp::status(ResponceHttp::STATUS_200, true, "Tramite creado correctamente")
             ];
         } else {
             return ResponceHttp::status(ResponceHttp::STATUS_500, true, 'No se pudo crear el tramite');
+        }
+    }
+
+    final static function sendMail()
+    {
+        $mail = new PHPMailer(true);
+
+        try {
+            $response = SettingModel::getSetting();
+            $setting = $response['data'];
+
+            $customerName = $_POST['name'];
+            $contacts = $_POST['email'];
+            $idProcedure = $_POST['subject'];
+            $procedureName = $_POST['message'];
+            $dueDate = $_POST['message'];
+            $userSesion = $_POST['message'];
+
+            $messageTemplate = $setting['employeeMessage'];
+
+            $messageTemplate = str_replace("[NOMBRE_CLIENTE]",    $customerName,  $messageTemplate);
+            $messageTemplate = str_replace("[CONTACTO]",          $contacts,      $messageTemplate);
+            $messageTemplate = str_replace("[ID_TRAMITE]",        $idProcedure,   $messageTemplate);
+            $messageTemplate = str_replace("[NOMBRE_TRAMITE]",    $procedureName, $messageTemplate);
+            $messageTemplate = str_replace("[FECHA_VENCIMIENTO]", $dueDate,       $messageTemplate);
+            $messageTemplate = str_replace("[USUARIO]",           $userSesion,    $messageTemplate);
+            
+            //Server settings
+            // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+            $mail->SMTPDebug = SMTP::DEBUG_OFF;                      //Enable verbose debug output
+            $mail->isSMTP();                                         //Send using SMTP
+            $mail->Host       = 'smtp.titan.email';                  //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                //Enable SMTP authentication
+            $mail->Username   = $_ENV['BIOSIMA_MAIL'];               //SMTP username
+            $mail->Password   = $_ENV['PASSWORD_MAIL'];              //SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;         //Enable implicit TLS encryption
+            $mail->Port       = 465;                                 //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+            //Recipients
+            $mail->setFrom('administracion@biosima.org', 'BIOSIMA PAGINA');
+            $mail->addAddress('administracion@biosima.org', 'BIOSIMA PAGINA');
+            $mail->addReplyTo('ibarrag@biosima.com.mx', 'Jesus Ibarra');
+            $mail->addReplyTo('ledon@biosima.com.mx', 'Dulce Ledon');
+
+            //Content
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = 'Contacto enviado desde wwww.biosima.org';
+            // $mail->Body    = $htmlTemplateString;
+            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+            $mail->send();
+
+            // $json = array();
+            // $json["status"] = 1;
+            // $json["mensaje"] = "Correo enviado correctamente";
+
+            error_log("Correo enviado correctamente");
+            LogModel::newLog(self::$userSesion, Module::PROCEDURE, Action::MAIL,"Correo de notificación de nuevo tramite enviado correctamente");
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            LogModel::newLog(self::$userSesion, Module::PROCEDURE, Action::MAIL,"No se pudo enviar el correo de notificación de nuevo tramite");
         }
     }
 

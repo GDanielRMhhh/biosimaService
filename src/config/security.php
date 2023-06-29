@@ -2,7 +2,6 @@
 
 namespace App\Config;
 
-use DateTime;
 use Dotenv\Dotenv;
 use Firebase\JWT\JWT;
 

@@ -72,11 +72,12 @@ class ComposerStaticInitbbe7640959b2d035bd2bcce4cc94df83
         ),
         'App\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src',
+            0 => __DIR__ . '/../..' . '/Src',
         ),
     );
 
     public static $classMap = array (
+        'App\\Config\\ResponceHttp' => __DIR__ . '/../..' . '/Src/Config/ResponceHttp.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Dotenv\\Dotenv' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Dotenv.php',

@@ -4,8 +4,8 @@ namespace App\Model;
 
 use App\Config\ResponceHttp;
 use App\Config\Security;
-use App\db\ConectionDB;
-use App\DB\Sql;
+use App\Db\ConectionDB;
+use App\Db\Sql;
 use App\Tools\Action;
 use App\Tools\Module;
 

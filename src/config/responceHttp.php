@@ -23,18 +23,21 @@ class ResponceHttp
             die(json_encode(ResponceHttp::status(self::STATUS_401, false, "No tiene autorización para consumir esta API")));
         }
 
-        $list = [''];
-
-        if ($method === 'OPTIONS') {
-            exit(0);
-        }
-
+        $list = ['https://wstest.biosima.org'];
+        
         if (in_array($origin, $list)) {
-            echo header("Access-Control-Allow-Origin: $origin",);
-            echo header("Access-Control-Allow-Methods: GET, PUT, POST, PATH, DELETE");
-            echo header("Allow: GET, PUT, POST, PATH, DELETE, OPTIONS");
-            echo header("Access-Control-Allow-Headers: X-API-Key, Origin, X-Requested-With, Content-Type, Accept, Authorization");
-            echo header("Content-Type: application/json");
+            if ($method === 'OPTIONS') {
+                echo header("Access-Control-Allow-Origin: $origin");
+                echo header("Access-Control-Allow-Methods: GET, PUT, POST, PATH, DELETE");
+                echo header("Access-Control-Allow-Headers: X-API-Key, Origin, X-Requested-With, Content-Type, Accept, Authorization");
+                exit(0);
+            } else {
+                echo header("Access-Control-Allow-Origin: $origin");
+                echo header("Access-Control-Allow-Methods: GET, PUT, POST, PATH, DELETE");
+                echo header("Allow: GET, PUT, POST, PATH, DELETE, OPTIONS");
+                echo header("Access-Control-Allow-Headers: X-API-Key, Origin, X-Requested-With, Content-Type, Accept, Authorization");
+                echo header("Content-Type: application/json");
+            }
         } else {
             die(json_encode(ResponceHttp::status(self::STATUS_401, false, "No tiene autorización para consumir esta API")));
         }

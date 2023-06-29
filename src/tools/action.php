@@ -11,6 +11,7 @@ class Action
     const ENABLE = 'Activar';
     const DISABLE = 'Desactivar';
     const UNSHOW = 'Ocultar';
+    const MAIL = 'Correo';
 
     final public static function getActionSring($status)
     {

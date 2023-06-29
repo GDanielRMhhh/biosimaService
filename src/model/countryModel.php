@@ -4,8 +4,7 @@ namespace App\Model;
 
 use App\Config\ResponceHttp;
 use App\Config\Security;
-use App\db\ConectionDB;
-use App\DB\Sql;
+use App\Db\ConectionDB;
 
 class CountryModel extends ConectionDB
 {
@@ -24,7 +23,7 @@ class CountryModel extends ConectionDB
     final public static function getName() { return self::$name; }
     final public static function getCode() { return self::$code; }
     
-    final public static function setIdCountry(string $idCountry) { self::$idCountry = $idCountry; }
+    final public static function setIdCountry(int $idCountry) { self::$idCountry = $idCountry; }
     final public static function setName(string $name) { self::$name = $name; }
     final public static function setCode(string $code) { self::$code = $code; }
     

@@ -1,8 +1,6 @@
 <?php
 
 use App\Controller\CountryController;
-use App\Controller\UserController;
-use App\Model\CountryModel;
 
 $method = strtolower($_SERVER['REQUEST_METHOD']);
 $route = $_GET['route'];
@@ -15,6 +13,3 @@ $app = new CountryController($method, $route, $params, $data, $headers);
 
 // Rutas
 $app->getAll('country/');
-// $app->getUser("country/{$params[1]}");
-// $app->post('country/');
-// $app->deleteUser("country/");
